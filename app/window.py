@@ -109,6 +109,13 @@ class MainWindow(QMainWindow):
         self._current = -1
         self._switch_tool(0)
 
+    @staticmethod
+    def _refresh_style(w: QWidget):
+        style = w.style()
+        if style is not None:
+            style.unpolish(w)
+            style.polish(w)
+
     def _switch_tool(self, idx: int):
         if idx == self._current:
             return
@@ -116,13 +123,11 @@ class MainWindow(QMainWindow):
         if 0 <= self._current < len(self._nav_buttons):
             old_btn = self._nav_buttons[self._current]
             old_btn.setProperty("active", "false")
-            old_btn.style().unpolish(old_btn)
-            old_btn.style().polish(old_btn)
+            self._refresh_style(old_btn)
 
         # Activate new
         self._current = idx
         self._stack.setCurrentIndex(idx)
         btn = self._nav_buttons[idx]
         btn.setProperty("active", "true")
-        btn.style().unpolish(btn)
-        btn.style().polish(btn)
+        self._refresh_style(btn)

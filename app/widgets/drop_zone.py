@@ -62,22 +62,25 @@ class DropZone(QFrame):
     def mousePressEvent(self, event):
         self._browse()
 
+    def _refresh_style(self):
+        style = self.style()
+        if style is not None:
+            style.unpolish(self)
+            style.polish(self)
+
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
             event.acceptProposedAction()
             self.setProperty("dragover", True)
-            self.style().unpolish(self)
-            self.style().polish(self)
+            self._refresh_style()
 
     def dragLeaveEvent(self, event):
         self.setProperty("dragover", False)
-        self.style().unpolish(self)
-        self.style().polish(self)
+        self._refresh_style()
 
     def dropEvent(self, event):
         self.setProperty("dragover", False)
-        self.style().unpolish(self)
-        self.style().polish(self)
+        self._refresh_style()
         urls = event.mimeData().urls()
         paths = [u.toLocalFile() for u in urls if os.path.isfile(u.toLocalFile())]
         if paths:

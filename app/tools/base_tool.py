@@ -81,17 +81,22 @@ class BaseTool(QScrollArea):
         sep.setFrameShape(QFrame.Shape.HLine)
         self._content.addWidget(sep)
 
+    @staticmethod
+    def _refresh_style(w: QWidget):
+        style = w.style()
+        if style is not None:
+            style.unpolish(w)
+            style.polish(w)
+
     def show_success(self, msg: str):
         self._status.setProperty("class", "status_success")
-        self._status.style().unpolish(self._status)
-        self._status.style().polish(self._status)
+        self._refresh_style(self._status)
         self._status.setText(f"✓  {msg}")
         self._status.show()
 
     def show_error(self, msg: str):
         self._status.setProperty("class", "status_error")
-        self._status.style().unpolish(self._status)
-        self._status.style().polish(self._status)
+        self._refresh_style(self._status)
         self._status.setText(f"✕  {msg}")
         self._status.show()
 
