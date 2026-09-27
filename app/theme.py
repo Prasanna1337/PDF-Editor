@@ -53,7 +53,7 @@ STYLESHEET = f"""
     outline: none;
 }}
 
-QMainWindow {{
+QMainWindow, QStackedWidget, QWidget#central_widget {{
     background: {BG_DARK};
 }}
 
@@ -101,9 +101,9 @@ QPushButton[class="nav_btn"][active="true"] {{
     font-weight: 600;
 }}
 
-/* ── Scroll area ───────────────────────────── */
-QScrollArea {{
-    background: transparent;
+/* ── Scroll area & tool containers ─────────── */
+QScrollArea, QScrollArea > QWidget > QWidget, #tool_page, #tool_container {{
+    background: {BG_DARK};
     border: none;
 }}
 
@@ -125,11 +125,6 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
 }}
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
     background: transparent;
-}}
-
-/* ── Tool pages ────────────────────────────── */
-#tool_page {{
-    background: {BG_DARK};
 }}
 
 #tool_title {{
@@ -186,20 +181,22 @@ QFrame[class="card"] {{
 QPushButton[class="primary"] {{
     background: {ACCENT};
     color: #ffffff;
-    border: none;
+    border: 1px solid {ACCENT};
     border-radius: {RADIUS_SM};
-    padding: 10px 28px;
+    padding: 9px 24px;
     font-weight: 600;
     font-size: {FONT_SIZE};
 }}
 
 QPushButton[class="primary"]:hover {{
     background: {ACCENT_HOVER};
+    border-color: {ACCENT_HOVER};
 }}
 
 QPushButton[class="primary"]:disabled {{
-    background: {BORDER};
-    color: {TEXT_DARK};
+    background: #1c2433;
+    color: #63758e;
+    border: 1px solid #283548;
 }}
 
 QPushButton[class="secondary"] {{
@@ -207,13 +204,19 @@ QPushButton[class="secondary"] {{
     color: {TEXT};
     border: 1px solid {BORDER};
     border-radius: {RADIUS_SM};
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-size: {FONT_SIZE};
 }}
 
 QPushButton[class="secondary"]:hover {{
     border-color: {BORDER_LIGHT};
     background: {BG_HOVER};
+}}
+
+QPushButton[class="secondary"]:disabled {{
+    background: #161b22;
+    color: #556070;
+    border-color: #21262d;
 }}
 
 QPushButton[class="danger"] {{

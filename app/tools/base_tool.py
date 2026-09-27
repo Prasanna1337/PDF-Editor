@@ -28,6 +28,7 @@ class BaseTool(QScrollArea):
 
         # Container
         container = QWidget()
+        container.setObjectName("tool_container")
         self._layout = QVBoxLayout(container)
         self._layout.setContentsMargins(48, 40, 48, 40)
         self._layout.setSpacing(0)

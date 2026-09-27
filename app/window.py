@@ -47,6 +47,7 @@ class MainWindow(QMainWindow):
 
         # ── Central widget ──
         central = QWidget()
+        central.setObjectName("central_widget")
         self.setCentralWidget(central)
         root = QHBoxLayout(central)
         root.setContentsMargins(0, 0, 0, 0)

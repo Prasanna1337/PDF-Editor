@@ -21,6 +21,7 @@ def main():
     os.environ.setdefault("QT_ENABLE_HIGHDPI_SCALING", "1")
 
     app = QApplication(sys.argv)
+    app.setStyle("Fusion")
     app.setApplicationName("PDF Editor")
     app.setApplicationVersion("1.0.0")
 

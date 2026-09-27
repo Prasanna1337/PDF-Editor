@@ -71,7 +71,7 @@ class PasswordTool(BaseTool):
         self._pw.setEchoMode(QLineEdit.EchoMode.Password)
 
         self._toggle_btn = self.make_secondary_btn("Show")
-        self._toggle_btn.setFixedWidth(64)
+        self._toggle_btn.setMinimumWidth(80)
         self._toggle_btn.clicked.connect(self._toggle_pw)
 
         pw_row.addWidget(self._pw)
@@ -89,11 +89,11 @@ class PasswordTool(BaseTool):
         self._folder_lbl.setMinimumWidth(1)
 
         self._folder_btn = self.make_secondary_btn("Choose…")
-        self._folder_btn.setFixedWidth(80)
+        self._folder_btn.setMinimumWidth(95)
         self._folder_btn.clicked.connect(self._choose_folder)
 
         self._reset_folder_btn = self.make_secondary_btn("Reset")
-        self._reset_folder_btn.setFixedWidth(60)
+        self._reset_folder_btn.setMinimumWidth(75)
         self._reset_folder_btn.clicked.connect(self._reset_folder)
         self._reset_folder_btn.hide()
 
