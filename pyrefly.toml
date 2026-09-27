@@ -1,0 +1,7 @@
+# Pyrefly type-checker configuration
+# Points to the Python interpreter where all dependencies are installed.
+
+python_interpreter = "C:\\Users\\Prasanna\\AppData\\Local\\Programs\\Python\\Python313\\python.exe"
+
+[python]
+version = "3.13"

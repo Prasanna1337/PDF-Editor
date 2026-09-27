@@ -15,32 +15,6 @@ from app.widgets.drop_zone import DropZone
 from core import pdf_ops
 
 
-# ── Background worker ────────────────────────────────────────────────────
-
-class UnlockWorker(QThread):
-    """Unlocks PDFs on a background thread, reporting progress per file."""
-    progress = pyqtSignal(int, str, bool)   # (index, message, ok)
-    finished = pyqtSignal(int, int)          # (success_count, fail_count)
-
-    def __init__(self, paths: list[str], password: str, out_dir: str):
-        super().__init__()
-        self._paths = paths
-        self._password = password
-        self._out_dir = out_dir
-
-    def run(self):
-        ok = fail = 0
-        for i, src in enumerate(self._paths):
-            stem = Path(src).stem
-            dst = os.path.join(self._out_dir, f"{stem}_unlocked.pdf")
-            try:
-                pdf_ops.remove_password(src, self._password, dst)
-                self.progress.emit(i, Path(src).name, True)
-                ok += 1
-            except Exception as exc:
-                self.progress.emit(i, f"{Path(src).name} — {exc}", False)
-                fail += 1
-        self.finished.emit(ok, fail)
 
 
 # ── Tool page ─────────────────────────────────────────────────────────────
@@ -56,7 +30,7 @@ class PasswordTool(BaseTool):
     def __init__(self):
         super().__init__()
         self._paths: list[str] = []
-        self._worker: UnlockWorker | None = None
+        self._worker: _MultiUnlockWorker | None = None
 
         # ── Drop zone ──
         self._drop = DropZone(
@@ -214,7 +188,8 @@ class PasswordTool(BaseTool):
         # Reset list icons
         for i in range(self._list.count()):
             item = self._list.item(i)
-            item.setText(f"  📄  {Path(self._paths[i]).name}")
+            if item:
+                item.setText(f"  📄  {Path(self._paths[i]).name}")
 
         # Progress
         self._progress.setMaximum(len(self._paths))
@@ -230,10 +205,11 @@ class PasswordTool(BaseTool):
 
     def _on_progress(self, index: int, name: str, ok: bool):
         item = self._list.item(index)
-        if ok:
-            item.setText(f"  ✅  {Path(self._paths[index]).name}")
-        else:
-            item.setText(f"  ❌  {name}")
+        if item:
+            if ok:
+                item.setText(f"  ✅  {Path(self._paths[index]).name}")
+            else:
+                item.setText(f"  ❌  {name}")
         self._progress.setValue(index + 1)
 
     def _on_finished(self, ok: int, fail: int):
