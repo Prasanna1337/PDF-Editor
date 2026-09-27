@@ -1,6 +1,6 @@
-# 📄 PDF Editor
+# 📜 Scribe
 
-A minimal, portable all-in-one PDF utility. No complicated setup — works on Windows, macOS, and Linux.
+A minimal, offline PDF workbench. Clean dark interface, fast, private, and portable. No complicated setup — works on Windows, macOS, and Linux.
 
 ---
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-The PDF Editor window will open. That's it! 🎉
+The **Scribe** window will open. That's it! 🎉
 
 ---
 
@@ -82,9 +82,9 @@ Make sure all dependencies installed successfully (no red errors during Step 3).
 If you want a single `.exe` file that needs no Python:
 ```bash
 pip install pyinstaller
-pyinstaller --onefile --windowed --name="PDF Editor" main.py
+pyinstaller --onefile --windowed --icon="app_icon.ico" --add-data="app_icon.ico;." --name="Scribe" main.py
 ```
-The output will be in `dist/PDF Editor.exe`.
+The output will be in `dist/Scribe.exe`.
 
 ---
 

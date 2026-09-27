@@ -41,7 +41,7 @@ TOOLS = [
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("PDF Editor")
+        self.setWindowTitle("Scribe")
         self.setMinimumSize(960, 640)
         self.resize(1080, 720)
 
@@ -61,11 +61,11 @@ class MainWindow(QMainWindow):
         sidebar_layout.setSpacing(0)
 
         # App branding
-        title = QLabel("PDF Editor")
+        title = QLabel("Scribe")
         title.setObjectName("sidebar_title")
         sidebar_layout.addWidget(title)
 
-        subtitle = QLabel("All-in-one PDF utility")
+        subtitle = QLabel("PDF Workbench")
         subtitle.setObjectName("sidebar_subtitle")
         sidebar_layout.addWidget(subtitle)
 

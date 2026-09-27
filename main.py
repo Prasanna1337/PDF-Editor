@@ -1,5 +1,5 @@
 """
-PDF Editor — portable all-in-one PDF utility.
+Scribe — portable all-in-one PDF utility.
 Entry point for both development and PyInstaller bundling.
 """
 import sys
@@ -22,7 +22,7 @@ def main():
 
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
-    app.setApplicationName("PDF Editor")
+    app.setApplicationName("Scribe")
     app.setApplicationVersion("1.0.0")
 
     icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app_icon.ico")
