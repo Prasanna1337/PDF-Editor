@@ -1,8 +1,42 @@
 # 📄 PDF Editor
 
-A minimal, portable all-in-one PDF utility for Windows. No installation needed — just run the `.exe`.
+A minimal, portable all-in-one PDF utility. No complicated setup — works on Windows, macOS, and Linux.
 
-## Features
+---
+
+## ⬇️ Download & Run (Quick Start)
+
+### Step 1 — Install Python
+If you don't have Python, download and install it from:
+👉 **https://www.python.org/downloads/**
+
+> ⚠️ During installation, make sure to check **"Add Python to PATH"**
+
+### Step 2 — Download this project
+Click the green **`< > Code`** button on this page → **Download ZIP** → Extract it anywhere on your PC.
+
+Or if you have Git:
+```bash
+git clone https://github.com/Prasanna1337/PDF-Editor.git
+cd PDF-Editor
+```
+
+### Step 3 — Install dependencies
+Open a terminal / command prompt inside the extracted folder and run:
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4 — Run the app
+```bash
+python main.py
+```
+
+The PDF Editor window will open. That's it! 🎉
+
+---
+
+## 🛠️ Features
 
 | Tool | Description |
 |------|-------------|
@@ -17,47 +51,84 @@ A minimal, portable all-in-one PDF utility for Windows. No installation needed �
 | ↕️ Reorder Pages | Drag-and-drop thumbnail reordering |
 | 🏷️ Edit Metadata | Edit title, author, subject, keywords |
 
-## Tech Stack
+---
 
-- **GUI**: PyQt6
-- **PDF Engine**: `pypdf` + `pikepdf` + `PyMuPDF`
-- **Image**: Pillow
-- **Bundling**: PyInstaller (single portable `.exe`)
+## 🖥️ System Requirements
 
-## Run from Source
+| | Minimum |
+|--|---------|
+| OS | Windows 10/11 · macOS 12+ · Ubuntu 20.04+ |
+| Python | 3.10 or newer |
+| RAM | 256 MB |
+| Disk | 200 MB (for dependencies) |
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+---
 
-# Launch
-python main.py
-```
+## ❓ Troubleshooting
 
-## Build Portable .exe
+**`pip` not found?**
+Try `pip3` instead of `pip`, or run `python -m pip install -r requirements.txt`.
 
+**`python` not found?**
+Make sure you checked "Add Python to PATH" during installation. Restart your terminal and try again.
+
+**App doesn't open?**
+Make sure all dependencies installed successfully (no red errors during Step 3).
+
+---
+
+## 🏗️ Build a Portable .exe (Windows)
+
+If you want a single `.exe` file that needs no Python:
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name="PDF Editor" main.py
-# Output: dist/PDF Editor.exe
 ```
+The output will be in `dist/PDF Editor.exe`.
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```
-pdf-editor/
-├── main.py              # Entry point
+PDF-Editor/
+├── main.py              # Entry point — run this
+├── requirements.txt     # Python dependencies
 ├── app/
 │   ├── window.py        # Main window & sidebar navigation
-│   ├── theme.py         # Dark theme QSS stylesheet
+│   ├── theme.py         # Dark theme stylesheet
 │   ├── widgets/
-│   │   └── drop_zone.py # Drag-and-drop file input widget
+│   │   └── drop_zone.py # Drag-and-drop file input
 │   └── tools/           # One file per tool (10 tools)
+│       ├── password_tool.py
+│       ├── merge_tool.py
+│       ├── split_tool.py
+│       ├── rotate_tool.py
+│       ├── compress_tool.py
+│       ├── watermark_tool.py
+│       ├── pdf_to_img.py
+│       ├── img_to_pdf.py
+│       ├── reorder_tool.py
+│       └── metadata_tool.py
 └── core/
     ├── pdf_ops.py       # All PDF manipulation logic
     └── utils.py         # File helpers
 ```
 
-## License
+---
 
-MIT
+## 📦 Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| `PyQt6` | GUI framework |
+| `pypdf` | PDF reading & writing |
+| `pikepdf` | Password removal & encryption |
+| `PyMuPDF` | Page thumbnails & image export |
+| `Pillow` | Image processing |
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, and distribute.
